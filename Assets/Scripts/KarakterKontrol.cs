@@ -22,11 +22,28 @@ public class KarakterKontrol : MonoBehaviour
     private Camera cam;
     private int score = 0;
     private bool isGameEnded=false;
-   
+    public GameObject CubePrefab;
+    [SerializeField]
+    GameObject[] stack;
 
 
 
-    private void Awake()
+    public void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.tag == "Azalt")
+        {
+
+            StartCubeMove(stack[stack.Length - 1].gameObject.transform.position, () => { });
+            Debug.Log("DOGRU YER");
+
+
+        }
+    }
+
+
+
+        private void Awake()
     {
 
         if (instance==null)
@@ -46,6 +63,7 @@ public class KarakterKontrol : MonoBehaviour
     {
 
         //cubes.Add(GameObject.FindGameObjectWithTag("Stack"));
+        stack = GameObject.FindGameObjectsWithTag("Stack");
             if (Input.GetButton("Fire1"))
             {
 
@@ -214,15 +232,22 @@ public class KarakterKontrol : MonoBehaviour
     public void StartCubeMove(Vector3 _intial, Action onComplate)
     {
         //Vector3 intialpos = cam.ScreenToWorldPoint(new Vector3(intial.position.x, intial.position.y, cam.transform.position.z * -1));
+        if (target != null)
+        {
+            GameObject _cube = Instantiate(CubePrefab, transform);
+            Vector3 targetPos = cam.ScreenToWorldPoint(new Vector3(target.position.x, target.position.y, cam.transform.position.z * -1));
+            StartCoroutine(MoveCube(_cube.transform, _intial, targetPos, onComplate));
+
+        }
 
 
-        Vector3 targetPos = cam.ScreenToWorldPoint(new Vector3(target.position.x, target.position.y, cam.transform.position.z * -1));
-        //GameObject _cube = Instantiate(prev,transform);
+
+        // GameObject _cube = stack[stack.Length - 1].gameObject;
 
 
-        cubes.Add(gameObject);
 
-       // StartCoroutine(MoveCube(stack[stack.Length].transform, _intial, targetPos, onComplate));
+
+        //StartCoroutine(MoveCube(_cube.transform, _intial, targetPos, onComplate));
     }
 
 

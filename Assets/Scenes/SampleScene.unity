@@ -7014,6 +7014,11 @@ PrefabInstance:
       objectReference: {fileID: 1437919599}
     - target: {fileID: 2504802705832717227, guid: 017e99d68309e0942a998744efda0a11,
         type: 3}
+      propertyPath: CubePrefab
+      value: 
+      objectReference: {fileID: 404856028}
+    - target: {fileID: 2504802705832717227, guid: 017e99d68309e0942a998744efda0a11,
+        type: 3}
       propertyPath: camControl
       value: 
       objectReference: {fileID: 963194229}

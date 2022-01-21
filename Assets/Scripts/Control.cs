@@ -11,11 +11,7 @@ public class Control : MonoBehaviour
     [SerializeField]
     GameObject[] stack;
     public Transform target;
-    [SerializeField]
-    private Camera cam;
-    public float speed;
-    public GameObject CubePrefab;
-
+ 
 
 
     private void Update()
@@ -63,7 +59,7 @@ public class Control : MonoBehaviour
 
         if (other.gameObject.tag=="Azalt")
         {
-            StartCubeMove(stack[stack.Length - 1].gameObject.transform.position, () => { });
+            //StartCubeMove(stack[stack.Length - 1].gameObject.transform.position, () => { });
 
             StartCoroutine(waitCouple());
 
@@ -124,48 +120,6 @@ public class Control : MonoBehaviour
 
      }
     */
-
-
-
-    public void StartCubeMove(Vector3 _intial, Action onComplate)
-    {
-        //Vector3 intialpos = cam.ScreenToWorldPoint(new Vector3(intial.position.x, intial.position.y, cam.transform.position.z * -1));
-        if(target!= null)
-        {
-            GameObject _cube = Instantiate(CubePrefab, transform);
-            Vector3 targetPos = cam.ScreenToWorldPoint(new Vector3(target.position.x, target.position.y, cam.transform.position.z * -1));
-            StartCoroutine(MoveCube(_cube.transform, _intial, targetPos, onComplate));
-            
-        }
-        
-        
-
-       // GameObject _cube = stack[stack.Length - 1].gameObject;
-
-
-        
-
-        //StartCoroutine(MoveCube(_cube.transform, _intial, targetPos, onComplate));
-    }
-
-
-    IEnumerator MoveCube(Transform obj, Vector3 startPos, Vector3 endPos, Action onComplate)
-    {
-        float time = 0;
-
-        while (time < 1)
-        {
-            time += speed * Time.deltaTime;
-            obj.position = Vector3.Lerp(startPos, endPos, time);
-
-            yield return new WaitForEndOfFrame();
-        }
-
-        onComplate.Invoke();
-    }
-
-
-
 
 
 
